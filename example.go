@@ -1,5 +1,7 @@
 #!/usr/bin/env goscript
 
+// Example of how to use goscript.
+
 package main
 
 import (
