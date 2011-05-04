@@ -2,8 +2,23 @@
 
 # Purpose: Compile and run a go file as a script.
 # Input: Path to a go file, additional arguments.
-# Output: Any output from the go script, plus temp files from compiling.
+# Output: Any output from the go script.
+# Side effects: Temp files from compiling.
 # Author: Issac Trotts <issac.trotts@gmail.com>
+
+echo_usage() {
+    echo 'usage: goscript program.go args...'
+}
+
+if [[ -z "$1" ]]; then
+    echo_usage
+    exit 1
+fi
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    echo_usage
+    exit 0
+fi
 
 set -o errexit
 
