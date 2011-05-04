@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Purpose: Compile and run a go file as a script.
+# Input: Path to a go file, additional arguments.
+# Output: Any output from the go script, plus temp files from compiling.
+# Author: Issac Trotts <issac.trotts@gmail.com>
+
+set -o errexit
+
+progname=$(basename $1 .go)
+shift
+
+workdir=/tmp/$progname-$RANDOM
+object_file=$progname.6
+
+mkdir -p $workdir
+# Strip out the shebang line, if any.
+sed 's/^#.*$//' $progname.go > $workdir/$progname.go
+
+pushd $workdir
+6g -o $object_file $progname.go
+6l -o $progname $object_file
+popd
+
+$workdir/$progname $*
+

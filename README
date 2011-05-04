@@ -1,7 +1,9 @@
-Goscript lets you run go files as scripts. Put a shebang line like
+This is the source code for Goscript.
 
-    #!/usr/bin/env go  
+Goscript lets you run go files as scripts.
 
-at the top of your one-line program, make it executable, and then you can run
-it as a script.
+Here's how to get started:
+
+$ make install
+$ ./example.go
 
