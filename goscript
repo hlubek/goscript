@@ -7,6 +7,7 @@
 
 set -o errexit
 
+srcdir=$(dirname $1)
 progname=$(basename $1 .go)
 shift
 
@@ -15,12 +16,12 @@ object_file=$progname.6
 
 mkdir -p $workdir
 # Strip out the shebang line, if any.
-sed 's/^#.*$//' $progname.go > $workdir/$progname.go
+sed 's/^#.*$//' $srcdir/$progname.go > $workdir/$progname.go
 
-pushd $workdir
+pushd $workdir > /dev/null
 6g -o $object_file $progname.go
 6l -o $progname $object_file
-popd
+popd > /dev/null
 
 $workdir/$progname $*
 
