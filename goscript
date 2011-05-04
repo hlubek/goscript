@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Purpose: Compile and run a go file as a script.
 # Input: Path to a go file, additional arguments.
@@ -7,7 +7,7 @@
 # Author: Issac Trotts <issac.trotts@gmail.com>
 
 echo_usage() {
-    echo 'usage: goscript program.go args...'
+    echo 'usage: goscript program.go [args]'
 }
 
 if [[ -z "$1" ]]; then
@@ -22,20 +22,20 @@ fi
 
 set -o errexit
 
-srcdir=$(dirname $1)
-progname=$(basename $1 .go)
+srcdir=`dirname $1`
+progname=`basename $1 .go`
 shift
 
 workdir=/tmp/$progname-$RANDOM
-object_file=$progname.6
+object_file=$progname.`goarch ext`
 
 mkdir -p $workdir
 # Strip out the shebang line, if any.
 sed 's/^#.*$//' $srcdir/$progname.go > $workdir/$progname.go
 
 pushd $workdir > /dev/null
-6g -o $object_file $progname.go
-6l -o $progname $object_file
+`goarch compiler` -o $object_file $progname.go
+`goarch linker` -o $progname $object_file
 popd > /dev/null
 
 $workdir/$progname $*

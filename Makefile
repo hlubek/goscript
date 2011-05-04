@@ -1,3 +1,10 @@
+include $(GOROOT)/src/Make.inc
+
+TARG=goarch
+GOFILES=goarch.go
+
 install:
-	cp goscript $(GOROOT)/bin
+	cp goarch goscript $(GOROOT)/bin
+
+include $(GOROOT)/src/Make.cmd
 
