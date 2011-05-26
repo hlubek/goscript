@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Purpose: Compile and run a go file as a script.
 # Input: Path to a go file, additional arguments.
@@ -10,12 +10,12 @@ echo_usage() {
     echo 'usage: goscript program.go [args]'
 }
 
-if [[ -z "$1" ]]; then
+if [ -z "$1" ]; then
     echo_usage
     exit 1
 fi
 
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+if [ "$1" == "-h" ]; then
     echo_usage
     exit 0
 fi
