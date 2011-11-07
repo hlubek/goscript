@@ -8,6 +8,7 @@ import (
     )
 
 func main() {
+    flag.Parse()
     if flag.NArg() == 0 || flag.Arg(0) == "-h" {
         fmt.Printf("usage: goarch <compiler|linker|ext>\n")
         os.Exit(1)
